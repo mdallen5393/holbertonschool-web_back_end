@@ -3,7 +3,7 @@ export default function updateStudentGradeByCity(students, city, newGrades) {
     .map((student) => {
       const dupe = data;
       dupe.grade = 'N/A';
-      for (dupe field of newGrades) {
+      for (const field of newGrades) {
         if (dupe.id === field.studentId) {
           dupe.grade = field.grade;
         }
