@@ -7,7 +7,7 @@ export default function updateStudentGradeByCity(students, city, newGrades) {
         if (dupe.id === field.studentId) {
           dupe.grade = field.grade;
         }
-        return dupe;
       }
+      return dupe;
     });
 }
