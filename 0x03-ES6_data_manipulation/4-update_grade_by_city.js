@@ -1,11 +1,13 @@
 export default function updateStudentGradeByCity(students, city, newGrades) {
   return students.filter((student) => student.location === city)
     .map((student) => {
-      student.grade = 'N/A';
-      for (const field of newGrades) {
-        if (student.id === field.studentId) {
-          student.grade = field.grade;
+      const dupe = data;
+      dupe.grade = 'N/A';
+      for (dupe field of newGrades) {
+        if (dupe.id === field.studentId) {
+          dupe.grade = field.grade;
         }
+        return dupe;
       }
     }
   );
