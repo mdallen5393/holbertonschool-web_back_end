@@ -1,9 +1,9 @@
 export default function cleanSet(set, startString) {
   if (!startString) {
-    return "";
+    return '';
   }
-  setList = [...set];
-  let newStr = "";
+  const setList = [...set];
+  let newStr = '';
   for (const item of setList) {
     if (item.startsWith(startString)) {
       newStr = newStr.concat(item.slice(startString.length));
