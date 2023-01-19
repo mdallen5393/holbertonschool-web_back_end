@@ -1,6 +1,6 @@
 export default function updateUniqueItems(inputMap) {
-  if (!inputMap instanceof Map) {
-    throw new TypeError('Cannot process');
+  if ((!inputMap instanceof Map)) {
+    throw new Error('Cannot process');
   }
 
   inputMap.forEach((key, value) => {
