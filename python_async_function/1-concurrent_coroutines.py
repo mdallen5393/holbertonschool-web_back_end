@@ -10,7 +10,10 @@ wait_random = __import__('0-basic_async_syntax').wait_random
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
+    """
+    Function that calls `n` instances of wait_random.
+    """
     wait_list: List = []
     for _ in range(n):
-        wait_list.append(await wait_random(max_delay))
+        await wait_list.append(wait_random(max_delay))
     return wait_list
