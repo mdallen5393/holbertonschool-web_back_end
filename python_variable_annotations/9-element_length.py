@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Function that does something with someone that defies my
+Function that does things to stuff whilst defying my
 understanding entirely.
 """
 from typing import Iterable, Sequence, List, Tuple
