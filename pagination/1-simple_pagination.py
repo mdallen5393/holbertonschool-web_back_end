@@ -1,6 +1,7 @@
 import csv
 import math
 from typing import List
+index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
@@ -23,4 +24,18 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-            pass
+        """
+        Returns the appropriate page of the dataset.
+        """
+        assert isinstance(page, int) and isinstance(page_size, int),\
+            'Arguments must be positive integers'
+        assert page > 0 and page_size > 0,\
+            'Arguments must be positive integers'
+
+        self.dataset()
+        start, end = index_range(page, page_size)
+
+        if start >= len(self.__dataset) or end > len(self.__dataset):
+            return []
+
+        return self.__dataset[start:end]
