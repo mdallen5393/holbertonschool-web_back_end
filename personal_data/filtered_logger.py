@@ -50,6 +50,8 @@ def get_logger() -> logging.Logger:
     new_logger: logging.Logger = logging.getLogger('user_data')
     new_logger.setLevel(logging.INFO)
     new_logger.propagate = False
-    new_logger.stream = RedactingFormatter
+    handler = logging.StreamHandler()
+    formatter = RedactingFormatter()
+    handler.setFormatter(formatter)
+    new_logger.addHandler(handler)
     return new_logger
-
