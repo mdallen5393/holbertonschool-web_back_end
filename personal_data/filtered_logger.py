@@ -42,6 +42,7 @@ def filter_datum(fields: List[str], redaction: str,
                                 obfuscated_str)
     return obfuscated_str
 
+
 def get_logger() -> logging.Logger:
     """
     Function that creates a Logger object and obfuscates the appropriate
@@ -50,8 +51,8 @@ def get_logger() -> logging.Logger:
     new_logger: logging.Logger = logging.getLogger('user_data')
     new_logger.setLevel(logging.INFO)
     new_logger.propagate = False
-    handler = logging.StreamHandler()
-    formatter = RedactingFormatter()
+    handler: logging.StreamHandler = logging.StreamHandler()
+    formatter: logging.Formatter = RedactingFormatter()
     handler.setFormatter(formatter)
     new_logger.addHandler(handler)
     return new_logger
