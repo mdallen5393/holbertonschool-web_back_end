@@ -47,8 +47,9 @@ def get_logger() -> logging.Logger:
     Function that creates a Logger object and obfuscates the appropriate
     data.
     """
-    logging.basicConfig(stream=RedactingFormatter, propagate=False)
     new_logger: logging.Logger = logging.getLogger('user_data')
     new_logger.setLevel(logging.INFO)
+    new_logger.propagate = False
+    new_logger.stream = RedactingFormatter
     return new_logger
 
