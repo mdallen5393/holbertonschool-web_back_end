@@ -84,8 +84,12 @@ def main() -> None:
 
     cursor.execute(query)
     users = cursor.fetchall()
+    field_names = [i[0] for i in cursor.description]
     for user in users:
-        user_str = RedactingFormatter.SEPARATOR.join(map(str, user))
+        user_dict = dict(zip(field_names, user))
+        user_str = RedactingFormatter.SEPARATOR.join(
+            f"{key}={value}" for key, value in user_dict.items()
+        )
         logger.info(user_str)
 
     db.close()
