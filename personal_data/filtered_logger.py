@@ -52,7 +52,6 @@ def get_logger() -> logging.Logger:
     new_logger.setLevel(logging.INFO)
     new_logger.propagate = False
     handler: logging.StreamHandler = logging.StreamHandler()
-    formatter: logging.Formatter = RedactingFormatter()
-    handler.setFormatter(formatter)
+    handler.setFormatter(RedactingFormatter())
     new_logger.addHandler(handler)
     return new_logger
