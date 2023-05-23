@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 """
 Contains a `hash_password` function that returns a salted,
 hashed password, which is a byte string.
