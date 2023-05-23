@@ -3,6 +3,7 @@
 Contains a function that returns the log message obfuscated.
 """
 import logging
+import re
 from typing import List
 
 
@@ -21,8 +22,13 @@ class RedactingFormatter(logging.Formatter):
         NotImplementedError
 
 def filter_datum(fields: List[str], redaction: str,
-                 message: str, separator: str):
+                 message: str, separator: str) -> str:
     """
     Function that returns the log message obfuscated.
     """
-    pass
+    obfuscated_str: str = message
+    for field in fields:
+        obfuscated_str = re.sub('{}=.*?(?={})'.format(field, separator),
+                                '{}={}'.format(field, redaction),
+                                obfuscated_str)
+    return obfuscated_str
