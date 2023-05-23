@@ -54,7 +54,7 @@ def get_logger() -> logging.Logger:
     new_logger.setLevel(logging.INFO)
     new_logger.propagate = False
     handler: logging.StreamHandler = logging.StreamHandler()
-    handler.setFormatter(RedactingFormatter())
+    handler.setFormatter(RedactingFormatter(PII_FIELDS))
     new_logger.addHandler(handler)
     return new_logger
 
@@ -69,3 +69,27 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
                 host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
                 database=os.getenv('PERSONAL_DATA_DB_NAME')
                 )
+
+
+def main() -> None:
+    """
+    Main function to retrieve all rows in a database and display each row in
+    a filtered format.
+    """
+    logger = get_logger()
+    db: mysql.connector.connection.MySQLConnection = get_db()
+    cursor = db.cursor()
+
+    query = ("SELECT * FROM users;")
+
+    cursor.execute(query)
+    users = cursor.fetchall()
+    for user in users:
+        user_str = RedactingFormatter.SEPARATOR.join(map(str, user))
+        logger.info(user_str)
+
+    db.close()
+
+
+if __name__ == '__main__':
+    main()
