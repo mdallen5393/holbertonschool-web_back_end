@@ -28,9 +28,12 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """Returns None
+        """validates all requests to secure the API.
         """
-        return None
+        if request is None:
+            return None
+        print(request)
+
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Returns a User object
