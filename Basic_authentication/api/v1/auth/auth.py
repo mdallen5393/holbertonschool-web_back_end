@@ -19,12 +19,8 @@ class Auth:
         if excluded_paths is None or excluded_paths == []:
             return True
 
-        path = path.rstrip('/')
-        excluded_paths = [p.rstrip('/') for p in excluded_paths]
-
-        if path in excluded_paths:
+        if path in excluded_paths or path + '/' in excluded_paths:
             return False
-
         return True
 
     def authorization_header(self, request=None) -> str:
@@ -33,7 +29,6 @@ class Auth:
         if request is None:
             return None
         print(request)
-
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Returns a User object
