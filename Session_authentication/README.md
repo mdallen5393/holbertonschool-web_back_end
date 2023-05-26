@@ -133,4 +133,3 @@ Updates the file `api/v1/views/session_auth.py`, by adding a new route `DELETE /
 * Uses `auth.destroy_session(request)` for deleting the Session ID contains in the request as cookie:
   * If `destroy_session` returns `False`, `abort(404)`
   * Otherwise, returns an empty JSON dictionary with the status code 200.
-  
