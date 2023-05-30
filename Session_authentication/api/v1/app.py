@@ -52,20 +52,36 @@ def unauthorized(error) -> str:
 def before_request():
     """Filters requests to error handlers
     """
+    print("test 0")
     path_list = ['/api/v1/status/',
                  '/api/v1/unauthorized',
                  '/api/v1/forbidden',
                  '/api/v1/auth_session/login/']
-    if auth and auth.require_auth(request.path, path_list):
-        if auth.authorization_header(request) is None\
-                and auth.session_cookie(request) is None:
-            abort(401)
-        if auth.authorization_header(request) is None\
-                and auth.session_cookie(request):
-            abort(403)
-        if auth.current_user(request) is None:
-            abort(403)
-        request.current_user = auth.current_user(request)
+    # print("test 1")
+    # if auth and auth.require_auth(request.path, path_list):
+    #     print("test 2")
+    #     if auth.authorization_header(request) is None\
+    #             and auth.session_cookie(request) is None:
+    #         print("test 3")
+    #         abort(401)
+    #     # if auth.authorization_header(request) is None\
+    #     #         and auth.session_cookie(request):
+    #     #     print("test 4")
+    #     #     abort(403)
+    #     request.current_user = auth.current_user(request)
+    #     if auth.current_user(request) is None:
+    #         print("test 5")
+    #         abort(403)
+    #     print("test 6")
+    if not auth.require_auth(request.path, path_list):
+        return
+    if not auth.authorization_header(request) and not auth.session_cookie(
+        request
+    ):
+        abort(401)
+    if auth.current_user(request) is None:
+        abort(403)
+    request.current_user = auth.current_user(request)
 
 
 if __name__ == "__main__":

@@ -27,8 +27,10 @@ class Auth:
     def authorization_header(self, request=None) -> str:
         """validates all requests to secure the API.
         """
+        print(request.headers)
         if request is None or 'Authorization' not in request.headers:
-            return None
+            print("No auth")
+            return 
         return request.headers['Authorization']
 
     def current_user(self, request=None) -> TypeVar('User'):
@@ -38,7 +40,10 @@ class Auth:
 
     def session_cookie(self, request=None):
         """Retrieves the value of the session cookie from the request."""
+        print(request)
         if request is None:
             return None
         # return request.cookies.get(self.session_cookie_name)
+        print(request.cookies.get(os.getenv("SESSION_NAME")))
+        print(os.getenv("SESSION_NAME"))
         return request.cookies.get(os.getenv("SESSION_NAME"))

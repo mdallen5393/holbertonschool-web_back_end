@@ -32,10 +32,13 @@ class SessionAuth(Auth):
         Overloads current_user; returns a User based on a
         cookie value.
         """
+        print("Test 1")
+
         if request is None:
             return None
 
         session_id = self.session_cookie(request)
+        print("Test 2")
         if session_id is None:
             return None
 
