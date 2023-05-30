@@ -5,12 +5,13 @@ Authentication.
 """
 import os
 from api.v1.views import app_views
-from flask import request, jsonify, make_response
+from flask import request, jsonify, make_response, abort
 from models.user import User
 from api.v1.app import auth
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
+@app_views.route('/auth_session/login/', methods=['POST'], strict_slashes=False)
 def login():
     """Route for session authentication"""
     email = request.form.get('email')
@@ -42,3 +43,12 @@ def login():
     response.set_cookie(session_cookie_name, session_id)
 
     return response
+
+@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/auth_session/logout/', methods=['DELETE'], strict_slashes=False)
+def logout():
+    """Route that deletes the session"""
+    from api.v1.app import auth
+    if not auth.destroy_session(request):
+        abort(404, jsonify({"error": "session could not be deleted"}))
+    return jsonify({}), 200
