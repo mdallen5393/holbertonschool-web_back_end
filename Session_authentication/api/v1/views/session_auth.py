@@ -10,8 +10,10 @@ from models.user import User
 from api.v1.app import auth
 
 
-@app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-@app_views.route('/auth_session/login/', methods=['POST'], strict_slashes=False)
+@app_views.route('/auth_session/login', methods=['POST'],
+                 strict_slashes=False)
+@app_views.route('/auth_session/login/', methods=['POST'],
+                 strict_slashes=False)
 def login():
     """Route for session authentication"""
     email = request.form.get('email')
@@ -44,8 +46,11 @@ def login():
 
     return response
 
-@app_views.route('/auth_session/logout', methods=['DELETE'], strict_slashes=False)
-@app_views.route('/auth_session/logout/', methods=['DELETE'], strict_slashes=False)
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+@app_views.route('/auth_session/logout/', methods=['DELETE'],
+                 strict_slashes=False)
 def logout():
     """Route that deletes the session"""
     from api.v1.app import auth
