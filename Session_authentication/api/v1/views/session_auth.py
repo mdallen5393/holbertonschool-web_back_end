@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# """
-# Module containing a Flask view that handles all routes for Session
-# Authentication.
-# """
+"""
+Module containing a Flask view that handles all routes for Session
+Authentication.
+"""
 import os
 from api.v1.views import app_views
 from flask import request, jsonify, make_response
