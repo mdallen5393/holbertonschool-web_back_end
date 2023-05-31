@@ -16,6 +16,7 @@ def index():
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users():
+    """Registers a new user"""
     email = request.form.get('email')
     if not email:
         return jsonify({"error": "email missing"}), 400
