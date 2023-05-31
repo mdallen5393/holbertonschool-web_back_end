@@ -54,7 +54,7 @@ def login():
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
     """Destroys a session id and redirects the user to GET /"""
-    session_id = request.cookies["session_id"]
+    session_id = request.cookies.get("session_id")
     if not session_id:
         abort(403)
     user = AUTH.get_user_from_session_id(session_id)
