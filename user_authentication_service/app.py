@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 """Contains definition for a Basic Flask app"""
 from auth import Auth
 from flask import Flask, jsonify, abort, request
