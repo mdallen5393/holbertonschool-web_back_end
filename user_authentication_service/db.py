@@ -1,3 +1,4 @@
+#!/user/bin/env python3
 """DB module
 """
 from typing import TypeVar
@@ -32,6 +33,8 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> User:
+        """Adds a user to the Users database and returns the new User object
+        """
         if not email:
             return None
         if not hashed_password:
