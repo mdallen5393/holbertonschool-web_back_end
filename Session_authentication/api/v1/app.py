@@ -52,7 +52,6 @@ def unauthorized(error) -> str:
 def before_request():
     """Filters requests to error handlers
     """
-    print("test 0")
     path_list = ['/api/v1/status/',
                  '/api/v1/unauthorized',
                  '/api/v1/forbidden',

@@ -12,8 +12,6 @@ from api.v1.app import auth
 
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
-@app_views.route('/auth_session/login/', methods=['POST'],
-                 strict_slashes=False)
 def login():
     """Route for session authentication"""
     email = request.form.get('email')
@@ -36,10 +34,8 @@ def login():
     user_dict = user.to_json()
 
     session_id = auth.create_session(user.id)
-    print(f"Session ID: {session_id}")
     session_cookie_name = os.getenv('SESSION_NAME')
     response = jsonify(user_dict)
-    print(f"Session Cookie Name: {session_cookie_name}")
     response = make_response(response)
 
     response.set_cookie(session_cookie_name, session_id)
@@ -48,8 +44,6 @@ def login():
 
 
 @app_views.route('/auth_session/logout', methods=['DELETE'],
-                 strict_slashes=False)
-@app_views.route('/auth_session/logout/', methods=['DELETE'],
                  strict_slashes=False)
 def logout():
     """Route that deletes the session"""
