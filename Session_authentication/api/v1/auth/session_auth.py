@@ -59,8 +59,8 @@ class SessionAuth(Auth):
         if not session_cookie:
             return False
         # Check whether Session ID is linked to a User ID
-        session_id = session_cookie.get('id')
-        user_id = self.user_id_for_session_id(session_id)
+        # session_id = session_cookie.get('id')
+        user_id = self.user_id_for_session_id(session_cookie)
         if not user_id:
             return False
-        self.user_id_by_session_id.pop(session_id)
+        self.user_id_by_session_id.pop(session_cookie)
