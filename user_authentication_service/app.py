@@ -33,6 +33,7 @@ def users():
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
+    """Creates a session_id and logs in the user"""
     email = request.form.get('email')
     if not email:
         return jsonify({"error": "email missing"}), 400
