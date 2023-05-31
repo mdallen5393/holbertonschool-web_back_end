@@ -44,6 +44,7 @@ def _generate_uuid() -> str:
     """Generates and returns a string representation of a new UUID."""
     return str(uuid4())
 
+
 def _hash_password(password: str) -> bytes:
     """Returns a salted hash of the input password"""
     encoded_password = password.encode('utf-8')
