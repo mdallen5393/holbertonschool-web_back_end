@@ -101,7 +101,7 @@ def update_password():
         return jsonify({"error": "reset token missing"})
     new_password = request.form.get("new_password")
     if not new_password:
-        return jsonify({"error":"new password missing"})
+        return jsonify({"error": "new password missing"})
     try:
         AUTH.update_password(reset_token, new_password)
     except ValueError:
