@@ -56,3 +56,13 @@ class DB:
             return user
         except InvalidRequestError:
             raise
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Used to update a user's attributes based on keyword arguments."""
+        try:
+            user = self.find_user_by(id=user_id)
+            for key, value in kwargs.items():
+                setattr(user, key, value)
+            return None
+        except InvalidRequestError:
+            raise
