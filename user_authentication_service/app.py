@@ -14,7 +14,7 @@ def index():
     return jsonify({"message": "Bienvenue"}), 200
 
 
-AUTH = Auth()
+# AUTH = Auth()
 
 
 if __name__ == "__main__":
