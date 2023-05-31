@@ -65,7 +65,8 @@ class DB:
                 if hasattr(user, key):
                     setattr(user, key, value)
                 else:
-                    raise AttributeError
+                    raise ValueError
+            self._session.commit()
             return None
         except InvalidRequestError:
             raise
