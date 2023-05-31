@@ -88,7 +88,6 @@ class Auth:
                              reset_token=None)
 
 
-
 def _generate_uuid() -> str:
     """Generates and returns a string representation of a new UUID."""
     return str(uuid4())
