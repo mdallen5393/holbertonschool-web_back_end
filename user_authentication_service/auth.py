@@ -2,7 +2,7 @@
 """Module that contains the Auth class"""
 from user import User
 from db import DB
-from bcrypt import hashpw, gensalt
+from bcrypt import hashpw, gensalt, checkpw
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -24,6 +24,19 @@ class Auth:
         hashed_password = _hash_password(password)
         user = self._db.add_user(email, hashed_password)
         return user
+
+    def valid_login(self, email: str, password: str) -> bool:
+        """Locates a user by email and checks whether the passwrod matches
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+        except NoResultFound:
+            return False
+        if user:
+            encoded_password = password.encode('utf-8')
+            if checkpw(encoded_password, user.hashed_password):
+                return True
+        return False
 
 
 def _hash_password(password: str) -> bytes:
