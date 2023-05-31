@@ -26,7 +26,7 @@ def users():
 
     try:
         AUTH.register_user(email, password)
-        return jsonify({"email": f"{email}", "message": "user created"}), 200
+        return jsonify({"email": email, "message": "user created"}), 200
     except ValueError:
         return {"message": "email already registered"}, 400
 
@@ -46,7 +46,7 @@ def login():
         abort(401)
 
     session_id = AUTH.create_session(email)
-    response = jsonify({"email": f"{email}", "message": "logged in"})
+    response = jsonify({"email": email, "message": "logged in"})
     response.set_cookie("session_id", session_id)
     return response
 
@@ -73,7 +73,7 @@ def profile():
     user = AUTH.get_user_from_session_id(session_id)
     if not user:
         abort(403)
-    return jsonify({"email": f"{user.email}"}), 200
+    return jsonify({"email": user.email}), 200
 
 
 @app.route('/reset_password', methods=["POST"], strict_slashes=False)
@@ -86,7 +86,26 @@ def get_reset_password_token():
         reset_token = AUTH.get_reset_password_token(email)
     except ValueError:
         abort(403)
-    return jsonify({"email": f"{email}", "reset_token": f"{reset_token}"}), 200
+    return jsonify({"email": email, "reset_token": reset_token}), 200
+
+
+@app.route('/reset_password', methods=["PUT"], strict_slashes=False)
+def update_password():
+    """Updates a password using a reset token"""
+    email = request.form.get("email")
+    if not email:
+        return jsonify({"error": "email missing"}), 400
+    reset_token = request.form.get("reset_token")
+    if not reset_token:
+        return jsonify({"error": "reset token missing"})
+    new_password = request.form.get("new_password")
+    if not new_password:
+        return jsonify({"error":"new password missing"})
+    try:
+        AUTH.update_password(reset_token, new_password)
+    except ValueError:
+        abort(403)
+    return jsonify({"email": email, "message": "Password updated"}), 200
 
 
 if __name__ == "__main__":
