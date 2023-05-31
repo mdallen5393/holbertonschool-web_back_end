@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+"""Module that contains the Auth class"""
 from db import DB
 from bcrypt import hashpw, gensalt
 
