@@ -48,6 +48,7 @@ class DB:
         return user
 
     def find_user_by(self, **kwargs) -> User:
+        """Returns a user using input keyword arguments."""
         try:
             user = self._session.query(User).filter_by(**kwargs).first()
             if user is None:
