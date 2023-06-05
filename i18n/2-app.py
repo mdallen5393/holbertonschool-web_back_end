@@ -23,7 +23,7 @@ def index():
     return render_template('0-index.html')
 
 
-@babel.localselector
+@babel.localeselector
 def get_locale():
     """Retrieves locale from request"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
