@@ -23,7 +23,7 @@ class TestGithubOrgClient(unittest.TestCase):
             f"https://api.github.com/orgs/{org_name}")
 
     @patch('client.GithubOrgClient.org')
-    def test_public_repose_url(self, mock_org):
+    def test_public_repos_url(self, mock_org):
         """
         Unit-tests the _public_repos_url property of the GithubOrgClient class
         """
