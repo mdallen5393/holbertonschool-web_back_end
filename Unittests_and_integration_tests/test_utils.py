@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Test Suite for testing utils"""
 import unittest
 from parameterized import parameterized
