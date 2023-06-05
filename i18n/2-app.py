@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Simple flask app with index.html template"""
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 app = Flask(__name__)
@@ -21,6 +21,12 @@ babel = Babel(app)
 def index():
     """Route for `/`"""
     return render_template('0-index.html')
+
+
+@babel.localselector
+def get_locale():
+    """Retrieves locale from request"""
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == '__main__':
