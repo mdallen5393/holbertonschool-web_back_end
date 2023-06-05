@@ -18,6 +18,6 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_org(self, org_name, mock_get_json):
         """Tests whether GithubOrgClient.org returns the correct value"""
         test_client = GithubOrgClient(org_name)
-        test_client.ort()
+        test_client.org()
         mock_get_json.assert_called_once_with(
             f"https://api.github.com/orgs/{org_name}")
