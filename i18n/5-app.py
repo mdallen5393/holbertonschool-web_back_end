@@ -42,8 +42,8 @@ def get_locale():
 def get_user():
     """Returns a user dictionary"""
     user_id = request.args.get('login_as')
-    if user_id and user_id in users:
-        return users[user_id]
+    if user_id and int(user_id) in users:
+        return users[int(user_id)]
     return None
 
 
