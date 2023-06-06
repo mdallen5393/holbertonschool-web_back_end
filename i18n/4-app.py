@@ -17,7 +17,7 @@ app.config.from_object(Config)
 babel = Babel(app)
 
 
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def index():
     """Route for `/`"""
     return render_template('4-index.html')
@@ -33,4 +33,4 @@ def get_locale():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run('0.0.0.0', port=5000, threaded=True, debug=True)
