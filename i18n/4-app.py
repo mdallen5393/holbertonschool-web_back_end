@@ -27,7 +27,7 @@ def index():
 def get_locale():
     """Retrieves locale from request"""
     locale = request.args.get('locale')
-    if locale in Config.LANGUAGES:
+    if locale and locale in Config.LANGUAGES:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
