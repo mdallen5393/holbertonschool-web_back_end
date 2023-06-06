@@ -53,8 +53,11 @@ def before_request():
     Uses get_user to find a user and sets it as a global
     on flask.g.user
     """
-    g.user = get_user()
-
+    user = get_user(request.args.get('login_as'))
+    if user:
+        g.user = get_user()
+    else:
+        g.user = None
 
 
 if __name__ == '__main__':
