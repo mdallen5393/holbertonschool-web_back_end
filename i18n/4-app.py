@@ -20,7 +20,7 @@ babel = Babel(app)
 @app.route('/')
 def index():
     """Route for `/`"""
-    return render_template('0-index.html')
+    return render_template('4-index.html')
 
 
 @babel.localeselector
