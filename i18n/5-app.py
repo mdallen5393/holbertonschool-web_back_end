@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Simple flask app with index.html template"""
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from flask_babel import Babel
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ babel = Babel(app)
 @app.route('/', strict_slashes=False)
 def index():
     """Route for `/`"""
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
 
 @babel.localeselector
@@ -53,11 +53,8 @@ def before_request():
     Uses get_user to find a user and sets it as a global
     on flask.g.user
     """
-    user = get_user(request.args.get('login_as'))
-    if user:
-        g.user = get_user()
-    else:
-        g.user = None
+    g.user = get_user()
+
 
 
 if __name__ == '__main__':
