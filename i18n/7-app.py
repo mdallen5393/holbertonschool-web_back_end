@@ -3,11 +3,12 @@
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
 import pytz
+from typing import Dict, List, Optional
 
 
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 
-users = {
+users: Dict[int, dict] = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
     2: {"name": "Beyonce", "locale": "en", "timezone": "US/Central"},
     3: {"name": "Spock", "locale": "kg", "timezone": "Vulcan"},
@@ -17,31 +18,31 @@ users = {
 
 class Config():
     """Class which configures available languages"""
-    LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = 'en'
-    BABEL_DEFAULT_TIMEZONE = 'UTC'
+    LANGUAGES: List[str] = ["en", "fr"]
+    BABEL_DEFAULT_LOCALE: str = 'en'
+    BABEL_DEFAULT_TIMEZONE: str = 'UTC'
 
 
 app.config.from_object(Config)
-babel = Babel(app)
+babel: Babel = Babel(app)
 
 
 @app.route('/', strict_slashes=False)
-def index():
+def index() -> None:
     """Route for `/`"""
     return render_template('5-index.html')
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Retrieves locale from request"""
     # Try to get locale from URL parameters
-    locale = request.args.get('locale')
+    locale: str = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
 
     # Try to get locale from user settings
-    user = get_user()
+    user: Optional[dict] = get_user()
     if user and user.get('locale') in app.config['LANGUAGES']:
         return user.get('locale')
 
@@ -50,9 +51,9 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     """Retrieves timezone"""
-    timezone = request.args.get('timezone')
+    timezone: str = request.args.get('timezone')
     if timezone:
         try:
             pytz.timezone(timezone)
@@ -60,7 +61,7 @@ def get_timezone():
         except pytz.exceptions.UnknownTimeZoneError:
             pass
 
-    user = get_user()
+    user: Optional(dict) = get_user()
     if user and user.get('timezone'):
         try:
             pytz.timezone(timezone)
@@ -74,7 +75,7 @@ def get_timezone():
 
 def get_user():
     """Returns a user dictionary"""
-    user_id = request.args.get('login_as')
+    user_id: Optional(dict) = request.args.get('login_as')
     if user_id:
         return users.get(int(user_id))
     return None
@@ -86,7 +87,7 @@ def before_request():
     Uses get_user to find a user and sets it as a global
     on flask.g.user
     """
-    g.user = get_user()
+    g.user: Optional(dict) = get_user()
 
 
 if __name__ == '__main__':
