@@ -34,7 +34,7 @@ def index():
 def get_locale():
     """Retrieves locale from request"""
     locale = request.args.get('locale')
-    if locale and locale in Config.LANGUAGES:
+    if locale and locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
@@ -42,8 +42,8 @@ def get_locale():
 def get_user():
     """Returns a user dictionary"""
     user_id = request.args.get('login_as')
-    if user_id and int(user_id) in users:
-        return users[int(user_id)]
+    if user_id:
+        return users.get(int(user_id))
     return None
 
 
