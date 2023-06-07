@@ -33,17 +33,9 @@ def index():
 @babel.localeselector
 def get_locale():
     """Retrieves locale from request"""
-    # Try to get locale from URL parameters
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
-
-    # Try to get locale from user settings
-    user = get_user()
-    if user and user.get('locale') in app.config['LANGUAGES']:
-        return user.get('locale')
-
-    # Try to get locale from request header
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
