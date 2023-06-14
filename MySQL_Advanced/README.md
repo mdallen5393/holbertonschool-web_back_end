@@ -117,4 +117,3 @@ Requirements:
 * The view `need_meeting` returns all students names when:
   * Their score is under (strict) 80
   * AND no `last_meeting` date OR more than a month
-
