@@ -5,3 +5,5 @@ package-Lock.json
 babel.createConfigItem.js
 _pycache_/
 *.pyc
+names.sql
+metal_bands.sql
