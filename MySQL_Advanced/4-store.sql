@@ -2,9 +2,7 @@
 -- quantity of an item after adding a new order.
 CREATE TRIGGER decrease_item
 AFTER INSERT ON orders
-FOR EACH Row
-BEGIN
+FOR EACH ROW
     UPDATE items
     SET quantity = quantity - NEW.number
-    WHERE name = New.item_name
-END;
+    WHERE name = New.item_name;
