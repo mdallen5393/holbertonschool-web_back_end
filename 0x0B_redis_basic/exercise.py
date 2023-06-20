@@ -46,7 +46,8 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+    def get(self, key: str, fn: Optional[Callable] = None) -> \
+            Union[str, bytes, int, float]:
         value = self._redis.get(key)
         if value is not None and fn:
             value = fn(value)
@@ -60,7 +61,9 @@ class Cache:
         value = self.get(key, int)
         return value
 
+
 def replay(method: Callable) -> None:
+    """Displays the history of calls of a particular function"""
     method_name = method.__qualname__
     count_key = method_name
     inputs_key = f"{method_name}:inputs"
@@ -72,4 +75,5 @@ def replay(method: Callable) -> None:
 
     print(f"{method_name} was called {int(count)} times:")
     for input_str, output_str in zip(inputs, outputs):
-        print(f"{method_name}(*{input_str.decode('utf-8')}) -> {output_str.decode('utf-8')}")
+        print(f"{method_name}(*{input_str.decode('utf-8')}) ->\
+              {output_str.decode('utf-8')}")
