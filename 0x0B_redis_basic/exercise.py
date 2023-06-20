@@ -9,6 +9,7 @@ from functools import wraps
 
 
 def count_calls(method: Callable) -> Callable:
+    """Increments a count for that key everytime the method is called"""
     key = method.__qualname__
 
     @wraps(method)
@@ -20,6 +21,7 @@ def count_calls(method: Callable) -> Callable:
 
 
 def call_history(method: Callable) -> Callable:
+    """Stores a history of inputs and outputs for a particular function"""
     inputs_key = f"{method.__qualname__}:inputs"
     outputs_key = f"{method.__qualname__}:outputs"
 
