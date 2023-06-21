@@ -1,7 +1,6 @@
 // mongo script that deletes all documents with `name=
 // "Holberton school"` in the collection `school`.
 
-db.school.delete(
-    {name: "Holberton school"},
-    {multi: true}
+db.school.deleteMany(
+    {name: "Holberton school"}
 )
