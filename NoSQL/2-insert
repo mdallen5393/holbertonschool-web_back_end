@@ -1,0 +1,5 @@
+// mongo script that inserts a document into the collection `school`
+
+db.collection.insertOne({
+    "name": "Holberton school"
+})
