@@ -9,7 +9,7 @@ BEGIN
     IF b = 0 THEN
         RETURN 0;
     END IF;
-    RETURN FLOAT(a / b);
+    RETURN CAST(a AS float) / CAST(b as float);
 END;
 //
 
