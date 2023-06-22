@@ -9,7 +9,7 @@ BEGIN
     IF b = 0 THEN
         RETURN 0;
     END IF;
-    RETURN FLOAT(a) / FLOAT(b);
+    RETURN FLOAT(a / b);
 END;
 //
 
