@@ -7,10 +7,12 @@ const readline = require('readline').createInterface({
 });
 
 readline.question('Welcome to Holberton School, what is your name?\n', name => {
-  process.stdout.write(`Your name is: ${name}!\n`);
+  process.stdout.write(`Your name is: ${name}!\r`);
   readline.close();
 });
 
-process.on('exit', function(code) {
-  process.stdout.write("This important software is now closing\n");
-});
+if (!process.stdin.isTTY) {
+  process.on('exit', function(code) {
+    process.stdout.write("This important software is now closing\n");
+  });
+}
