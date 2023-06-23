@@ -13,6 +13,6 @@ readline.question('Welcome to Holberton School, what is your name?\n', name => {
 
 if (!process.stdin.isTTY) {
   process.on('exit', function(code) {
-    console.log("This important software is now closing\n");
+    console.log("This important software is now closing");
   });
 }
