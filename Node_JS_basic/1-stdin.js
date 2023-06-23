@@ -11,8 +11,6 @@ readline.question('Welcome to Holberton School, what is your name?\n', name => {
   readline.close();
 });
 
-if (!process.stdin.isTTY) {
-  process.on('exit', function(code) {
-    process.stdout.write("This important software is now closing\n");
-  });
-}
+process.on('exit', function(code) {
+  process.stdout.write("This important software is now closing\n");
+});
