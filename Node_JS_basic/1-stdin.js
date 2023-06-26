@@ -15,6 +15,6 @@ readline.question('Welcome to Holberton School, what is your name?\n', name => {
   readline.close();
 });
 
-process.on('close', function(code) {
-  process.stdout.write("This important software is now closing\n");
-});
+readline.on('close', () => {
+  process.stdout.write('This important software is now closing\n');
+})
