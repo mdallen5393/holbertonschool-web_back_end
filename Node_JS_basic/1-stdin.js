@@ -7,6 +7,10 @@ const readline = require('readline').createInterface({
 });
 
 readline.question('Welcome to Holberton School, what is your name?\n', name => {
+  if (name.trim() === '') {
+    process.stdout.write('No name provided. Exiting...\n');
+    process.exit(0);
+  }
   process.stdout.write(`Your name is: ${name}\r`);
   readline.close();
 });
