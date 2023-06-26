@@ -7,7 +7,7 @@ const readline = require('readline').createInterface({
 });
 
 readline.question('Welcome to Holberton School, what is your name?\n', name => {
-  process.stdout.write(`Your name is: ${name}!\r`);
+  process.stdout.write(`Your name is: ${name}\r`);
   readline.close();
 });
 
