@@ -4,7 +4,7 @@ const fs = require('fs').promises;
 
 function countStudents(path) {
   return fs.readFile(path, 'utf8')
-    .then(data => {
+    .then((data) => {
       // split the data into rows and remove empty lines
       const rows = data.split('\n').filter((row) => row);
 
@@ -24,11 +24,11 @@ function countStudents(path) {
         const students = rows.filter((row) => row.split(',')[fieldIndex] === field);
         // retrieve names and print them comma-separated
         console.log(`Number of students in ${field}: ${students.length}. List: ${students.map((student) => student.split(',')[firstNameIndex]).join(', ')}`);
+      });
+    })
+    .catch(() => {
+      throw new Error('Cannot load the database');
     });
-  })
-  .catch(err => {
-    throw new Error('Cannot load the database');
-  })
 }
 
 module.exports = countStudents;
