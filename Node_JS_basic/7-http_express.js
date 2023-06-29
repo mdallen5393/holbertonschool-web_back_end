@@ -47,7 +47,7 @@ app.get('/students', (req, res) => {
     .catch((err) => {
       res.send(`This is the list of our students\n${err.message}`);
     });
-})
+});
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}.`);
