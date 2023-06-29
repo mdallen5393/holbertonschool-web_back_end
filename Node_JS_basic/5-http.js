@@ -2,30 +2,7 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs').promises;
 
-const app = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  let q = url.parse(req.url, true).path;
-  if (q === "/") {
-    res.write('Hello Holberton School!');
-    res.end();
-  }
-  if (q === "/students") {
-    res.write('This is the list of our students\n');
-    countStudents(process.argv[2], res)
-    .then((data) => {
-      res.write(data);
-      res.end();
-    })
-    .catch((error) => {
-      res.write(error.message);
-      res.end();
-    })
-  }
-}).listen(1245);
-
-module.exports = app;
-
-function countStudents(path, res) {
+function countStudents(path) {
   let result = '';
   return fs.readFile(path, 'utf8')
     .then((data) => {
@@ -51,8 +28,30 @@ function countStudents(path, res) {
       });
       return result;
     })
-    .catch((error) => {
+    .catch(() => {
       throw new Error('Cannot load the database');
     });
 }
 
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' });
+  const q = url.parse(req.url, true).path;
+  if (q === '/') {
+    res.write('Hello Holberton School!');
+    res.end();
+  }
+  if (q === '/students') {
+    res.write('This is the list of our students\n');
+    countStudents(process.argv[2], res)
+      .then((data) => {
+        res.write(data);
+        res.end();
+      })
+      .catch((error) => {
+        res.write(error.message);
+        res.end();
+      });
+  }
+}).listen(1245);
+
+module.exports = app;
