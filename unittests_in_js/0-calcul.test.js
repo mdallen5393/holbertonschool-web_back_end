@@ -17,6 +17,16 @@ describe('My Function', function() {
     assert.equal(result, 4);
   });
 
+  it('should round first number', function() {
+    const result = calculateNumber(1.1, 2);
+    assert.equal(result, 3);
+  });
+
+  it('should round second number', function() {
+    const result = calculateNumber(1, 2.1);
+    assert.equal(result, 3);
+  });
+
   it('should work with integer values', function() {
     const result = calculateNumber(1, 4);
     assert.equal(result, 5);
