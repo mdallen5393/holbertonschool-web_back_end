@@ -1,7 +1,7 @@
 const assert = require('assert')
 const calculateNumber = require('./0-calcul');
 
-describe('My Function', function() {
+describe('The calculateNumber function', function() {
   it('should round the numbers and return their sum', function() {
     const result = calculateNumber(1.5, 2.3);
     assert.equal(result, 4);
