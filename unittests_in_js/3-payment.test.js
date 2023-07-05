@@ -17,4 +17,11 @@ describe('sendPaymentRequestToApi', function () {
     expect(consoleSpy.calledWith('The total is: 120')).to.be.true;
     consoleSpy.restore();
   });
+
+  it('should call Utils.calculateNumber with the correct arguments', function() {
+    const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
+    sendPaymentRequestToApi(100, 20);
+    expect(calculateNumberSpy.calledWith('SUM', 100, 20)).to.be.true;
+    calculateNumberSpy.restore();
+  });
 });
