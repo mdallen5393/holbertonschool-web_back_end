@@ -13,12 +13,12 @@ app.get('/cart/:id(\\d+)', (req, res) => {
 });
 
 app.get('/available_payments', (req, res) => {
-  return {
+  res.json({
     payment_methods: {
       credit_cards: true,
       paypal: false
     }
-  };
+  });
 });
 
 app.post('/login', (req, res) => {
